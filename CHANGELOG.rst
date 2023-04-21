@@ -11,10 +11,14 @@ Change Log
 
 .. There should always be an "Unreleased" section for changes pending release.
 
-Unreleased
-**********
 
-* Initial copy-paste circuit code.
+[0.2.0] - 2023-05-04
+************************************************
+
+Added
+=====
+
+* Admin views for creating new section-based courses.
 
 [0.1.0] - 2023-04-03
 ************************************************
@@ -22,4 +26,4 @@ Unreleased
 Added
 =====
 
-* First release on PyPI.
+* Initial section-derived course creation code.

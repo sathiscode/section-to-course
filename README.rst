@@ -50,7 +50,7 @@ This application is not yet available on PyPI, so you will need to install it fr
     git+https://github.com/open-craft/section-to-course.git
 
 
-...to the ``requirements/private.txt`` file of your Open edX installation, and then run ``pip install -r requirements/private.txt``. ``section_to_course`` is currently only known to work with OpenCraft's Nutmeg fork of Open edX, so you will need to use that fork. We expect it will work with newer upstream versions within a few weeks.
+...to the ``requirements/private.txt`` file of your Open edX installation, and then run ``pip install -r requirements/private.txt``. If you're developing locally without the platform, create a virtualenv using the latest Python 3.8 release, and then run ``pip install -e .`` from the root of this repository.
 
 Development
 -----------
@@ -80,3 +80,22 @@ Then, in your `devstack` directory, run:
     make dev.shell.studio
     cd /edx/src/section-to-course
     pip install -e .
+
+
+Usage
+*****
+
+Once installed, the plugin should automatically register itself within Django. Be sure to run database migrations.
+
+The admin views are in the Django admin, under the "Section to Course" section. From there, you can create a new section to course link, which will create a new course with the same content as the section you selected. You can also view the list of existing section to course links, refresh them, and delete them.
+
+Refreshing a Course
+-------------------
+
+There are two ways to refresh a course:
+
+1. Use the admin action from the changelist view. This will allow you to refresh several courses at once.
+2. Use the refresh button on the detail view for a single course, shown here:
+
+.. image:: assets/admin_screenshot.png
+   :alt: A screenshot of the admin page showing the refresh button in the upper left

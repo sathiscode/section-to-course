@@ -1,5 +1,9 @@
 # Core requirements for using this application
 -c constraints.txt
-edx-opaque-keys>=2.3.0
-django>=3.2.15
-django-model-utils>=4.2.0
+djangorestframework
+django
+django-model-utils
+django-object-actions
+edx-django-utils
+edx-opaque-keys
+edx-organizations

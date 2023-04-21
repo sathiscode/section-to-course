@@ -32,7 +32,9 @@ INSTALLED_APPS = (
     'django.contrib.contenttypes',
     'django.contrib.messages',
     'django.contrib.sessions',
+    'django_object_actions',
     'section_to_course',
+    'organizations',
 )
 
 LOCALE_PATHS = [

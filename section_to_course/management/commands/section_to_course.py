@@ -8,8 +8,8 @@ from django.core.management.base import BaseCommand
 from opaque_keys import InvalidKeyError
 from opaque_keys.edx.keys import CourseKey
 from opaque_keys.edx.locator import BlockUsageLocator
-from xmodule.modulestore.exceptions import ItemNotFoundError
 
+from section_to_course.compat import not_found_exception
 from section_to_course.utils import paste_from_template
 
 User = get_user_model()
@@ -49,7 +49,7 @@ class Command(BaseCommand):
                 source_block_usage_key=source_block_usage_key,
                 user=user,
             )
-        except ItemNotFoundError as err:
+        except not_found_exception() as err:
             self.stderr.write(self.style.ERROR(str(err)))
             sys.exit(4)
         self.stdout.write(self.style.SUCCESS('Section copied successfully.'))
