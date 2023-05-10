@@ -1,17 +1,19 @@
 """
 Tests utility functions for section_to_course.
 """
-from common.djangoapps.student.tests.factories import UserFactory
+from common.djangoapps.student.tests.factories import UserFactory  # pylint: disable=import-error
 from django.utils import timezone
 from freezegun import freeze_time
-from xmodule.modulestore.django import modulestore
-from xmodule.modulestore.tests.django_utils import ModuleStoreTestCase
+from xmodule.modulestore.tests.django_utils import ModuleStoreTestCase  # pylint: disable=import-error
+
+from section_to_course.compat import modulestore
 
 try:
     from xmodule.modulestore.tests.factories import BlockFactory, CourseFactory
 except ImportError:
     # This is no longer needed in Palm.
-    from xmodule.modulestore.tests.factories import ItemFactory as BlockFactory, CourseFactory
+    from xmodule.modulestore.tests.factories import CourseFactory
+    from xmodule.modulestore.tests.factories import ItemFactory as BlockFactory
 
 from section_to_course.models import SectionToCourseLink
 from section_to_course.utils import paste_from_template
@@ -19,7 +21,7 @@ from section_to_course.utils import paste_from_template
 # TODO: Add CI capability. We need to rope in the platform to perform these tests.
 
 
-class TestPasteFromTemplate(ModuleStoreTestCase):
+class TestPasteFromTemplate(ModuleStoreTestCase):  # pylint: disable=no-self-use
     """
     Tests of the paste_from_template function.
     """

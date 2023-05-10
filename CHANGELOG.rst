@@ -14,12 +14,21 @@ Change Log
 Unreleased
 **********
 
-* Initial copy-paste circuit code.
+*
 
-[0.1.0] - 2023-04-03
-************************************************
+[0.2.0] - 2023-05-10
+********************
 
 Added
 =====
 
+* Admin views for creating new section-based courses.
 * First release on PyPI.
+
+[0.1.0] - 2023-04-03
+********************
+
+Added
+=====
+
+* Initial section-derived course creation code.

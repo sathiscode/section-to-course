@@ -7,7 +7,7 @@ from django.test import TestCase
 from section_to_course.models import SectionToCourseLink
 
 
-class TestSectionToCourseLink(TestCase):
+class TestSectionToCourseLink(TestCase):  # pylint: disable=no-self-use
     """
     Tests of the SectionToCourseLink model.
     """

@@ -3,6 +3,7 @@ Database models for section_to_course.
 """
 # from django.db import models
 from django.db import models
+from django.utils import timezone
 from model_utils.models import TimeStampedModel
 from opaque_keys.edx.django.models import CourseKeyField, UsageKeyField
 
@@ -18,7 +19,7 @@ class SectionToCourseLink(TimeStampedModel):
     destination_course_id = CourseKeyField(max_length=255, db_index=True, null=False, blank=False)
     source_section_id = UsageKeyField(max_length=255, db_index=True, null=False, blank=False)
     destination_section_id = UsageKeyField(max_length=255, db_index=True, null=False, blank=False)
-    last_refresh = models.DateTimeField(null=True, blank=True)
+    last_refresh = models.DateTimeField(null=True, blank=True, default=timezone.now)
 
     class Meta:
         """Meta settings for SectionToCourseLink model."""
