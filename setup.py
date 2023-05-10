@@ -105,6 +105,7 @@ setup(
     version=VERSION,
     description="""Factors sections from Open edX courses into their own new course.""",
     long_description=README + '\n\n' + CHANGELOG,
+    long_description_content_type='text/x-rst',
     author='OpenCraft',
     author_email='help@opencraft.com',
     url='https://github.com/open-craft/section-to-course',

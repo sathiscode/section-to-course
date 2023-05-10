@@ -11,17 +11,22 @@ Change Log
 
 .. There should always be an "Unreleased" section for changes pending release.
 
+Unreleased
+**********
 
-[0.2.0] - 2023-05-04
-************************************************
+*
+
+[0.2.0] - 2023-05-10
+********************
 
 Added
 =====
 
 * Admin views for creating new section-based courses.
+* First release on PyPI.
 
 [0.1.0] - 2023-04-03
-************************************************
+********************
 
 Added
 =====
