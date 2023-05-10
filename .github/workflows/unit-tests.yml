@@ -1,0 +1,76 @@
+name: unit-tests
+
+on:
+  pull_request:
+  push:
+    branches:
+      - "master"
+      - "open-release/*.master"
+  
+jobs:
+  run-tests:
+    if: (github.repository != 'openedx/edx-platform' && github.repository != 'edx/edx-platform-private') || (github.repository == 'openedx/edx-platform' && (startsWith(github.base_ref, 'open-release') == true))
+    runs-on: [ ubuntu-20.04 ]
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: [3.8]
+        django-version:
+          - "pinned"
+    
+    name: section-to-course-gh-hosted-python-${{ matrix.python-version }},django-${{ matrix.django-version }}
+    steps:
+      - name: Checkout edx-platform repository
+        uses: actions/checkout@v3
+        with:
+          repository: openedx/edx-platform
+          ref: ${{ github.base_ref }}
+
+      - name: install edx-platform required packages
+        run: sudo apt-get update && sudo apt-get install libxmlsec1-dev lynx
+      
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Get pip cache dir
+        id: pip-cache-dir
+        run: |
+          echo "dir=$(pip cache dir)" >> $GITHUB_OUTPUT
+
+      - name: Cache pip dependencies
+        id: cache-dependencies
+        uses: actions/cache@v3
+        with:
+          path: ${{ steps.pip-cache-dir.outputs.dir }}
+          key: ${{ runner.os }}-pip-${{ hashFiles('requirements/edx/testing.txt') }}
+          restore-keys: ${{ runner.os }}-pip-
+  
+      - name: Install Required Python Dependencies
+        env:
+          PIP_SRC: ${{ runner.temp }}
+        run: |
+          pip install --upgrade pip
+          pip install -r requirements/edx/pip-tools.txt
+          # Upgrade pip-tools from 6.6.0 to latest version. v6.6.0 has a bug related to BAR_TYPE import (https://github.com/jazzband/pip-tools/issues/1617)
+          pip install --upgrade pip-tools
+          pip-sync --pip-args="--exists-action=w" requirements/edx/testing.txt
+          pip install -e .
+          if [[ "${{ matrix.django-version }}" != "pinned" ]]; then
+            pip install "django~=${{ matrix.django-version }}.0"
+            pip check # fail if this test-reqs/Django combination is broken
+          fi
+
+      - run: mkdir -p ./src/section-to-course
+      - name: Checkout section-to-course repo into src directory
+        uses: actions/checkout@v3
+        with:
+          path: ./src/section-to-course
+
+      - name: Install test requirements
+        working-directory: ./src/section-to-course
+        run: pip install -e .
+
+      - name: Run tests
+        run: pytest --pyargs section_to_course --rootdir cms

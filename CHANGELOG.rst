@@ -16,6 +16,14 @@ Unreleased
 
 *
 
+[0.3.0] - 2023-05-11
+********************
+
+Added
+=====
+
+* github actions unit-test action added.
+
 [0.2.0] - 2023-05-10
 ********************
 
