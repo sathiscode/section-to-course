@@ -76,6 +76,15 @@ jobs:
         uses: actions/checkout@v3
         with:
           path: ${{ env.SECTION_TO_COURSE_PATH }}
+          
+      - name: Debug step
+        working-directory: ${{ env.SECTION_TO_COURSE_PATH }}
+        run: |
+          echo "current directory"
+          pwd
+          echo "$PYTHONPATH"
+          sudo apt-get install tree
+          tree -a -L 2 .
 
       - name: Run integration test
         working-directory: ${{ env.SECTION_TO_COURSE_PATH }}
