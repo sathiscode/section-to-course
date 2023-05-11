@@ -101,6 +101,6 @@ jobs:
 
       - name: Run integration test
         env:
-          PYTHONPATH: ${{ GITHUB_WORKSPACE }}
+          PYTHONPATH: $GITHUB_WORKSPACE
         working-directory: ${{ env.SECTION_TO_COURSE_PATH }}
         run: make test_integration
