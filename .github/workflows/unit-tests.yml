@@ -79,10 +79,6 @@ jobs:
         with:
           path: ${{ env.SECTION_TO_COURSE_PATH }}
 
-#       - name: Install section-to-course test requirements
-#         working-directory: ${{ env.SECTION_TO_COURSE_PATH }}
-#         run: pip install -r requirements/test.txt
-
       - name: Run integration test
         working-directory: ${{ env.SECTION_TO_COURSE_PATH }}
         run: make test_integration
