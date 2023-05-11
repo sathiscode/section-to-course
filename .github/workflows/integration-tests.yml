@@ -41,10 +41,10 @@ jobs:
       - name: install edx-platform required packages
         run: sudo apt-get update && sudo apt-get install libxmlsec1-dev lynx
 
-      - name: Start MongoDB
-        uses: supercharge/mongodb-github-action@1.7.0
-        with:
-          mongodb-version: 4.4
+#       - name: Start MongoDB
+#         uses: supercharge/mongodb-github-action@1.7.0
+#         with:
+#           mongodb-version: 4.4
       
       - name: Setup Python
         uses: actions/setup-python@v4
