@@ -37,44 +37,44 @@ jobs:
           ref: 'opencraft-release/nutmeg.2'
           path: ${{ env.EDX_PLATFORM_PATH }}
 
-      - name: install edx-platform required packages
-        run: sudo apt-get update && sudo apt-get install libxmlsec1-dev lynx
+#       - name: install edx-platform required packages
+#         run: sudo apt-get update && sudo apt-get install libxmlsec1-dev lynx
 
-      - name: Start MongoDB
-        uses: supercharge/mongodb-github-action@1.7.0
-        with:
-          mongodb-version: 4.4
+#       - name: Start MongoDB
+#         uses: supercharge/mongodb-github-action@1.7.0
+#         with:
+#           mongodb-version: 4.4
       
-      - name: Setup Python
-        uses: actions/setup-python@v4
-        with:
-          python-version: 3.8
+#       - name: Setup Python
+#         uses: actions/setup-python@v4
+#         with:
+#           python-version: 3.8
 
-      - name: Get pip cache dir
-        id: pip-cache-dir
-        run: |
-          echo "dir=$(pip cache dir)" >> $GITHUB_OUTPUT
+#       - name: Get pip cache dir
+#         id: pip-cache-dir
+#         run: |
+#           echo "dir=$(pip cache dir)" >> $GITHUB_OUTPUT
 
-      - name: Cache pip dependencies
-        id: cache-dependencies
-        uses: actions/cache@v3
-        with:
-          path: ${{ steps.pip-cache-dir.outputs.dir }}
-          key: ${{ runner.os }}-pip-${{ hashFiles('requirements/edx/testing.txt') }}
-          restore-keys: ${{ runner.os }}-pip-
+#       - name: Cache pip dependencies
+#         id: cache-dependencies
+#         uses: actions/cache@v3
+#         with:
+#           path: ${{ steps.pip-cache-dir.outputs.dir }}
+#           key: ${{ runner.os }}-pip-${{ hashFiles('requirements/edx/testing.txt') }}
+#           restore-keys: ${{ runner.os }}-pip-
   
-      - name: Install edx-platform Required Python Dependencies
-        env:
-          PIP_SRC: ${{ runner.temp }}
-        working-directory: ${{ env.EDX_PLATFORM_PATH }}
-        run: |
-          if [[ "${{ matrix.edx-platform-version }}" == "master" ]]; then
-            make test-requirements
-          elif [[ "${{ matrix.edx-platform-version }}" == "open-release/nutmeg.2" ]]; then
-            pip install -r requirements/pip.txt
-            pip install -r requirements/edx/development.txt --src ${{ runner.temp }}
-            pip install "django~=3.2.0"
-          fi
+#       - name: Install edx-platform Required Python Dependencies
+#         env:
+#           PIP_SRC: ${{ runner.temp }}
+#         working-directory: ${{ env.EDX_PLATFORM_PATH }}
+#         run: |
+#           if [[ "${{ matrix.edx-platform-version }}" == "master" ]]; then
+#             make test-requirements
+#           elif [[ "${{ matrix.edx-platform-version }}" == "open-release/nutmeg.2" ]]; then
+#             pip install -r requirements/pip.txt
+#             pip install -r requirements/edx/development.txt --src ${{ runner.temp }}
+#             pip install "django~=3.2.0"
+#           fi
 
       - name: Create section-to-course directory
         run: mkdir -p ${{ env.SECTION_TO_COURSE_PATH }}
@@ -101,6 +101,6 @@ jobs:
 
       - name: Run integration test
         env:
-          PYTHONPATH: $PWD
+          PYTHONPATH: ${{ GITHUB_WORKSPACE }}
         working-directory: ${{ env.SECTION_TO_COURSE_PATH }}
         run: make test_integration
