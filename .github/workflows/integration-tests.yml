@@ -102,5 +102,9 @@ jobs:
       - name: Run integration test
         env:
           PYTHONPATH: $GITHUB_WORKSPACE
+          TEST_CWD: $PWD
         working-directory: ${{ env.SECTION_TO_COURSE_PATH }}
-        run: make test_integration
+        run: |
+          echo "PythonPath: $PYTHONPATH"
+          echo "TEST_CWD: $TEST_CWD"
+          make test_integration
