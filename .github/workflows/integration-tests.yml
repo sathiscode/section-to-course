@@ -31,8 +31,8 @@ jobs:
           path: ${{ env.EDX_PLATFORM_PATH }}
           
       - name: Checkout open-craft edx-platform repository
-        if: ${{ matrix.edx-platform-version }} == 'open-release/nutmeg.2'
         uses: actions/checkout@v3
+        if: ${{ matrix.edx-platform-version }} == 'open-release/nutmeg.2'
         with:
           repository: open-craft/edx-platform
           ref: 'opencraft-release/nutmeg.2'
