@@ -10,7 +10,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        edx-platform-version: [ 'open-release/nutmeg.2' ]
+        edx-platform-version: [ 'master', 'open-release/nutmeg.2' ]
     env:
       EDX_PLATFORM_PATH: './edx/app/edxapp/edx-platform'
       SECTION_TO_COURSE_PATH: './edx/src/section-to-course'
@@ -31,6 +31,7 @@ jobs:
           path: ${{ env.EDX_PLATFORM_PATH }}
           
       - name: Checkout open-craft edx-platform repository
+        if: ${{ matrix.edx-platform-version }} == 'open-release/nutmeg.2'
         uses: actions/checkout@v3
         with:
           repository: open-craft/edx-platform
