@@ -77,11 +77,14 @@ jobs:
         with:
           path: ${{ env.SECTION_TO_COURSE_PATH }}
       
-      - name: Set Pythonpath
-        working-directory: ${{ env.SECTION_TO_COURSE_PATH }}
-        run: echo "PYTHONPATH=./" >> $GITHUB_ENV
+#       - name: Set Pythonpath
+#         working-directory: ${{ env.SECTION_TO_COURSE_PATH }}
+#         run: echo "PYTHONPATH=./" >> $GITHUB_ENV
+        
       - name: Debug step
         working-directory: ${{ env.SECTION_TO_COURSE_PATH }}
+        env:
+          PYTHONPATH: ./
         run: |
           echo "current directory"
           pwd
@@ -91,6 +94,6 @@ jobs:
 
       - name: Run integration test
         env:
-          PIP_SRC: ${{ runner.temp }}
+          PYTHONPATH: ./
         working-directory: ${{ env.SECTION_TO_COURSE_PATH }}
         run: make test_integration
