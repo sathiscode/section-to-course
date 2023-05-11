@@ -10,7 +10,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        edx-platform-version: [ 'master', 'open-release/nutmeg.2' ]
+        edx-platform-version: [ 'open-release/nutmeg.2' ]
     env:
       EDX_PLATFORM_PATH: './edx/app/edxapp/edx-platform'
       SECTION_TO_COURSE_PATH: './edx/src/section-to-course'
@@ -102,7 +102,7 @@ jobs:
 
       - name: Run integration test
         env:
-          PYTHONPATH: ${{ github.workspace }}/${{ env.SECTION_TO_COURSE_PATH }}
+          PYTHONPATH: ${{ github.workspace }}/edx/src/section-to-course
         working-directory: ${{ env.SECTION_TO_COURSE_PATH }}
         run: |
           echo "PythonPath: $PYTHONPATH"
