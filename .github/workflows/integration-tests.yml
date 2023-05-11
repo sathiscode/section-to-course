@@ -87,5 +87,7 @@ jobs:
           tree -a -L 2 .
 
       - name: Run integration test
+        env:
+          PIP_SRC: ${{ runner.temp }}
         working-directory: ${{ env.SECTION_TO_COURSE_PATH }}
         run: make test_integration
