@@ -30,11 +30,11 @@ jobs:
           ref: ${{ matrix.edx-platform-version }}
           path: ${{ env.EDX_PLATFORM_PATH }}
           
-      - name: Checkout edx-platform repository
+      - name: Checkout open-craft edx-platform repository
         uses: actions/checkout@v3
         with:
           repository: open-craft/edx-platform
-          ref: ${{ matrix.edx-platform-version }}
+          ref: 'opencraft-release/nutmeg.2'
           path: ${{ env.EDX_PLATFORM_PATH }}
 
       - name: install edx-platform required packages
