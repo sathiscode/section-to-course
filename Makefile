@@ -60,7 +60,7 @@ requirements: piptools ## install development environment requirements
 
 test_integration: export DJANGO_SETTINGS_MODULE=cms.envs.test
 test_integration:
-	cd ../../app/edxapp/edx-platform/ && pytest --pyargs section_to_course --rootdir lms
+	cd ../../app/edxapp/edx-platform/ && pytest --showlocals --tb=long --pyargs section_to_course --rootdir lms
 
 diff_cover: test ## find diff lines that need test coverage
 	diff-cover coverage.xml
