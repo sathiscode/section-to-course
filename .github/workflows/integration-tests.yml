@@ -79,21 +79,21 @@ jobs:
       
 #       - name: Set Pythonpath
 #         working-directory: ${{ env.SECTION_TO_COURSE_PATH }}
-#         run: echo "PYTHONPATH=./" >> $GITHUB_ENV
+#         run: echo "PYTHONPATH=./:${{ env.SECTION_TO_COURSE_PATH }}:${{ env.SECTION_TO_COURSE_PATH }}/section_to_course" >> $GITHUB_ENV
         
       - name: Debug step
         working-directory: ${{ env.SECTION_TO_COURSE_PATH }}
         env:
-          PYTHONPATH: ./
+          PYTHONPATH: ./:${{ env.SECTION_TO_COURSE_PATH }}:${{ env.SECTION_TO_COURSE_PATH }}/section_to_course
         run: |
           echo "current directory"
           pwd
-          echo "$PYTHONPATH"
+          echo "PythonPath: $PYTHONPATH"
           sudo apt-get install tree
           tree -a -L 2 .
 
       - name: Run integration test
         env:
-          PYTHONPATH: ./
+          PYTHONPATH: ./:${{ env.SECTION_TO_COURSE_PATH }}:${{ env.SECTION_TO_COURSE_PATH }}/section_to_course
         working-directory: ${{ env.SECTION_TO_COURSE_PATH }}
         run: make test_integration
