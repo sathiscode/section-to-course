@@ -23,7 +23,7 @@ class SectionToCourseLink(TimeStampedModel):
 
     class Meta:
         """Meta settings for SectionToCourseLink model."""
-
+        app_label = "section_to_course"
         unique_together = ('source_course_id', 'destination_course_id', 'source_section_id')
 
     def __str__(self):
