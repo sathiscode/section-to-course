@@ -102,7 +102,7 @@ jobs:
 
       - name: Install section-to-course package
         working-directory: ${{ env.SECTION_TO_COURSE_PATH }}
-        run: pip install .
+        run: pip install -e .
 
 
       - name: Run integration test
