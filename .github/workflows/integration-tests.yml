@@ -10,7 +10,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        edx-platform-version: [ 'open-release/nutmeg.2' ]
+        edx-platform-version: [ 'master', 'open-release/nutmeg.master' ]
     env:
       EDX_PLATFORM_PATH: './edx/app/edxapp/edx-platform'
       SECTION_TO_COURSE_PATH: './edx/src/section-to-course'
@@ -32,7 +32,7 @@ jobs:
           
       - name: Checkout open-craft edx-platform repository
         uses: actions/checkout@v3
-        if: ${{ matrix.edx-platform-version }} == 'open-release/nutmeg.2'
+        if: ${{ matrix.edx-platform-version }} == 'open-release/nutmeg.master'
         with:
           repository: open-craft/edx-platform
           ref: 'opencraft-release/nutmeg.2'
@@ -84,30 +84,11 @@ jobs:
         uses: actions/checkout@v3
         with:
           path: ${{ env.SECTION_TO_COURSE_PATH }}
-      
-#       - name: Set Pythonpath
-#         working-directory: ${{ env.SECTION_TO_COURSE_PATH }}
-#         run: echo "PYTHONPATH=$PWD:$PWD/section_to_course" >> $GITHUB_ENV
-        
-#       - name: Debug step
-#         working-directory: ${{ env.SECTION_TO_COURSE_PATH }}
-#         env:
-#           PYTHONPATH: $PWD
-#         run: |
-#           echo "current directory"
-#           pwd
-#           echo "PythonPath: $PYTHONPATH"
-#           sudo apt-get install tree
-#           tree -a -L 2 .
-
+  
       - name: Install section-to-course package
         working-directory: ${{ env.SECTION_TO_COURSE_PATH }}
         run: pip install -e .
-
-
+        
       - name: Run integration test
-#         env:
-#           PYTHONPATH: ${{ github.workspace }}/${{ env.SECTION_TO_COURSE_PATH }}
         working-directory: ${{ env.SECTION_TO_COURSE_PATH }}
-        run: |
-          make test_integration
+        run: make test_integration
