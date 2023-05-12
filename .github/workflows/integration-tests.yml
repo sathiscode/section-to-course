@@ -71,7 +71,7 @@ jobs:
         run: |
           if [[ "${{ matrix.edx-platform-version }}" == "master" ]]; then
             make test-requirements
-          elif [[ "${{ matrix.edx-platform-version }}" == "open-release/nutmeg.2" ]]; then
+          elif [[ "${{ matrix.edx-platform-version }}" == "open-release/nutmeg.master" ]]; then
             pip install -r requirements/pip.txt
             pip install -r requirements/edx/development.txt --src ${{ runner.temp }}
             pip install "django~=3.2.0"
