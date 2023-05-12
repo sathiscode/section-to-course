@@ -100,9 +100,14 @@ jobs:
 #           sudo apt-get install tree
 #           tree -a -L 2 .
 
+      - name: Install section-to-course package
+        working-directory: ${{ env.SECTION_TO_COURSE_PATH }}
+        run: pip install -e .
+
+
       - name: Run integration test
-        env:
-          PYTHONPATH: ${{ github.workspace }}/${{ env.SECTION_TO_COURSE_PATH }}
+#         env:
+#           PYTHONPATH: ${{ github.workspace }}/${{ env.SECTION_TO_COURSE_PATH }}
         working-directory: ${{ env.SECTION_TO_COURSE_PATH }}
         run: |
           echo "PythonPath: $PYTHONPATH"
